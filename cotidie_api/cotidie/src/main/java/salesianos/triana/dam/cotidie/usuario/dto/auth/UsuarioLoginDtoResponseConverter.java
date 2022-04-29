@@ -15,7 +15,6 @@ public class UsuarioLoginDtoResponseConverter {
                 .rol(usuario.getRole().name())
                 .tokenJwt(token)
                 .fotoPerfil(usuario.getFotoPerfil())
-                .telefono(usuario.getTelefono())
                 .fechaDeNacimiento(usuario.getFechaNaciemiento())
                 .build();
     }

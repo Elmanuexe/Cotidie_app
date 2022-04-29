@@ -18,7 +18,6 @@ public class UsuarioLoginDtoResponse {
     private String fotoPerfil;
     private String tokenJwt;
     private boolean isPrivate;
-    private String direccion,telefono,ciudad;
     private LocalDate fechaDeNacimiento;
 
 }

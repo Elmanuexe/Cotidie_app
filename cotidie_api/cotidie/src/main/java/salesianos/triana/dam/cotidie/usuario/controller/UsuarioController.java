@@ -34,7 +34,6 @@ public class UsuarioController {
     public UsuarioLoginDtoResponse editarMiPerfil (@AuthenticationPrincipal Usuario usuario,
                                                    @Valid @RequestPart ("usuario") UsuarioEditDto dto,
                                                    @RequestPart ("file")MultipartFile file) throws IOException {
-
         return usuarioLoginDtoResponseConverter.UserAndTokenToUsuarioDtoResponse(usuarioService.save(dto,file,usuario),null);
     }
 

@@ -1,8 +1,6 @@
 package salesianos.triana.dam.cotidie.usuario.dto.auth;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import salesianos.triana.dam.cotidie.usuario.validation.anotation.SamePassword;
 import salesianos.triana.dam.cotidie.usuario.validation.anotation.UniqueField;
 
@@ -13,6 +11,8 @@ import java.time.LocalDate;
 
 @Builder
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @SamePassword(password1 = "password", password2 = "password2")
 public class UsuarioRegisterDto {
 
@@ -26,9 +26,8 @@ public class UsuarioRegisterDto {
     private String email;
     private String password;
     private String password2;
-    private String uri;
-    private boolean isPrivado;
-    private String direccion,telefono,ciudad;
+    private String fotoPerfil;
+    private String telefono;
     @Past (message = "{birth.date.must.past}")
     private LocalDate fechaDeNacimiento;
 
