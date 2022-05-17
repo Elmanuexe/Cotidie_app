@@ -1,6 +1,7 @@
 package salesianos.triana.dam.cotidie.usuario.model;
 
 import lombok.*;
+import org.aspectj.weaver.ast.Or;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.Parameter;
@@ -9,11 +10,16 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import salesianos.triana.dam.cotidie.ausencia.model.Ausencia;
+import salesianos.triana.dam.cotidie.notificacion.model.Notificacion;
+import salesianos.triana.dam.cotidie.organizacion.model.Organizacion;
+import salesianos.triana.dam.cotidie.vacacion.model.Vacacion;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -38,7 +44,6 @@ public class Usuario implements Serializable, UserDetails {
                     )
             }
     )
-
     private UUID id;
     private String nombre,apellidos,email,telefono;
     private String fotoPerfil;
@@ -57,6 +62,34 @@ public class Usuario implements Serializable, UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+
+    //ASOCIACIONES//
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<Ausencia> ausencias = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<Vacacion> vacaciones = new ArrayList<>();
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<Notificacion> notificaciones = new ArrayList<>();
+
+    @ManyToOne
+    private Organizacion organizacion;
+
+
+    //HELPERS ORGANIZACION//
+
+    public void addToOrganizacion(Organizacion o){
+        this.organizacion=o;
+        o.getMiembros().add(this);
+    }
+
+    public void removeFromOrganizacion(Organizacion o){
+        this.organizacion=null;
+        o.getMiembros().remove(this);
+    }
 
 
     @Override

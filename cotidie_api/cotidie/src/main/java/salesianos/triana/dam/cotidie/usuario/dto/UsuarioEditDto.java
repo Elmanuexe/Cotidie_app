@@ -15,6 +15,5 @@ public class UsuarioEditDto {
     private String apellidos;
     @Email
     private String email;
-    private LocalDate fechaDeNacimiento;
 
 }

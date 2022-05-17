@@ -23,7 +23,6 @@ public class UsuarioRegisterDtoConverter {
                 .role(role)
                 .fotoPerfil(dto.getFotoPerfil())
                 .telefono(dto.getTelefono())
-                .fechaNaciemiento(dto.getFechaDeNacimiento())
                 .build();
     }
 }

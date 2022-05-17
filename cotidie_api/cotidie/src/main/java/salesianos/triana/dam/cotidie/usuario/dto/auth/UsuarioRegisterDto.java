@@ -6,8 +6,7 @@ import salesianos.triana.dam.cotidie.usuario.validation.anotation.UniqueField;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Past;
-import java.time.LocalDate;
+
 
 @Builder
 @Getter @Setter
@@ -28,7 +27,5 @@ public class UsuarioRegisterDto {
     private String password2;
     private String fotoPerfil;
     private String telefono;
-    @Past (message = "{birth.date.must.past}")
-    private LocalDate fechaDeNacimiento;
 
 }

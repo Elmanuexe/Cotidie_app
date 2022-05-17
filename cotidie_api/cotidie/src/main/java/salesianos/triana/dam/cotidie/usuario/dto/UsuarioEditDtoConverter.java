@@ -10,7 +10,6 @@ public class UsuarioEditDtoConverter {
         u.setNombre(dto.getNombre()==null?u.getNombre(): dto.getNombre());
         u.setApellidos(dto.getApellidos()==null?u.getApellidos(): dto.getApellidos());
         u.setEmail(dto.getEmail()==null?u.getEmail():dto.getEmail());
-        u.setFechaNaciemiento(dto.getFechaDeNacimiento()==null?u.getFechaNaciemiento():dto.getFechaDeNacimiento());
         return u;
     }
 }
