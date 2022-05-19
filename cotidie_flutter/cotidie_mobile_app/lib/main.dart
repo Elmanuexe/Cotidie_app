@@ -1,3 +1,4 @@
+import 'package:cotidie_mobile_app/pages/menu_page.dart';
 import 'package:cotidie_mobile_app/pages/register_page.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         
         '/login': (context) => const LoginPage(),
         '/register' : (context) => const RegisterPage(),
+        '/menu' : (context) => const MenuPage()
       },
     );
   }
