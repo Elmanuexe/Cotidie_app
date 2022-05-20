@@ -1,14 +1,14 @@
-package salesianos.triana.dam.cotidie.organizacion.model;
+package salesianos.triana.dam.cotidie.tipoActividad.model;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import salesianos.triana.dam.cotidie.notificacion.model.Notificacion;
+import salesianos.triana.dam.cotidie.planificacion.model.PlanificacionMensual;
 import salesianos.triana.dam.cotidie.usuario.model.Usuario;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -18,8 +18,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "Notificacion")
-public class Organizacion {
+@Table(name = "TipoActividad")
+public class TipoActividad {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -35,8 +35,24 @@ public class Organizacion {
     )
     private UUID id;
 
-    private String nombre;
+    private Enum Tipo;
+    private LocalDate fecha;
+    private String Descripcion;
+    private LocalDateTime horaInicio;
+    private LocalDateTime horaFIn;
+    private Boolean todoElDia;
 
-    @OneToMany(mappedBy = "organizacion", fetch = FetchType.LAZY)
-    private List<Usuario> miembros = new ArrayList<>();
+    @ManyToOne
+    private PlanificacionMensual planificacion;
+
+    //HELPERS PLANIFICACION//
+    public void addDiaToPlanificacion(PlanificacionMensual u){
+        this.planificacion=u;
+        u.getDias().add(this);
+    }
+
+    public void removeDiaFromPlanificacion(PlanificacionMensual u){
+        this.planificacion=u;
+        u.getDias().remove(this);
+    }
 }

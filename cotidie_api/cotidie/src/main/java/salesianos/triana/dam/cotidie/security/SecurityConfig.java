@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import salesianos.triana.dam.cotidie.security.jwt.Autenticacion;
 import salesianos.triana.dam.cotidie.security.jwt.Autorizacion;
 import salesianos.triana.dam.cotidie.security.jwt.FiltroSeguridad;
+import salesianos.triana.dam.cotidie.usuario.model.Role;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -59,6 +60,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/auth/**").permitAll()
+                .antMatchers("/ausencia/**").authenticated()
+                .antMatchers("/ausencia/dia/hoy").hasRole(Role.ADMIN.name())
                 .anyRequest().permitAll();
 
         http.addFilterBefore(filtroSeguridad, UsernamePasswordAuthenticationFilter.class);

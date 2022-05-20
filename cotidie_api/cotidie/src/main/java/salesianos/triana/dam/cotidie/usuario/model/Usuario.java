@@ -1,7 +1,6 @@
 package salesianos.triana.dam.cotidie.usuario.model;
 
 import lombok.*;
-import org.aspectj.weaver.ast.Or;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.Parameter;
@@ -12,7 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import salesianos.triana.dam.cotidie.ausencia.model.Ausencia;
 import salesianos.triana.dam.cotidie.notificacion.model.Notificacion;
-import salesianos.triana.dam.cotidie.organizacion.model.Organizacion;
+import salesianos.triana.dam.cotidie.planificacion.model.PlanificacionMensual;
 import salesianos.triana.dam.cotidie.vacacion.model.Vacacion;
 
 import javax.persistence.*;
@@ -75,21 +74,8 @@ public class Usuario implements Serializable, UserDetails {
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<Notificacion> notificaciones = new ArrayList<>();
 
-    @ManyToOne
-    private Organizacion organizacion;
-
-
-    //HELPERS ORGANIZACION//
-
-    public void addToOrganizacion(Organizacion o){
-        this.organizacion=o;
-        o.getMiembros().add(this);
-    }
-
-    public void removeFromOrganizacion(Organizacion o){
-        this.organizacion=null;
-        o.getMiembros().remove(this);
-    }
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<PlanificacionMensual> planificacionMensual = new ArrayList<>();
 
 
     @Override

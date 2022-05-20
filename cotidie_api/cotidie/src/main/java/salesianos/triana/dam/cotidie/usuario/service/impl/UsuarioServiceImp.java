@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import salesianos.triana.dam.cotidie.error.exceptions.EntityNotFoundExceptionCustom;
 import salesianos.triana.dam.cotidie.shared.file.service.FileService;
+import salesianos.triana.dam.cotidie.shared.service.BaseService;
 import salesianos.triana.dam.cotidie.usuario.dto.UserBasicInfoDtoConverter;
 import salesianos.triana.dam.cotidie.usuario.dto.UsuarioEditDto;
 import salesianos.triana.dam.cotidie.usuario.dto.UsuarioEditDtoConverter;
@@ -24,7 +25,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class UsuarioServiceImp implements UsuarioService {
+public class UsuarioServiceImp extends BaseService<Usuario, UUID, UsuarioRepository> implements UsuarioService{
 
     private final UsuarioRepository usuarioRepository;
     private final UsuarioRegisterDtoConverter usuarioRegisterDtoConverter;

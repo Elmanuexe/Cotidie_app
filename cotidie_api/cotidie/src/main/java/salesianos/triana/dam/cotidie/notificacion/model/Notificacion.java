@@ -40,12 +40,12 @@ public class Notificacion {
 
 
     //HELPERS USUARIO//
-    public void addInmobiliariaToUser(Usuario u){
+    public void addNotificacionToUser(Usuario u){
         this.usuario=u;
         u.getNotificaciones().add(this);
     }
 
-    public void removeInmobiliariaFromUser(Usuario u){
+    public void removeNotificacionFromUser(Usuario u){
         this.usuario=u;
         u.getNotificaciones().remove(this);
     }
