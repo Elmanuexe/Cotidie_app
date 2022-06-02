@@ -10,7 +10,8 @@ import java.util.UUID;
 @NoArgsConstructor @AllArgsConstructor
 public class UserBasicInfoDto {
 
-    private String nick;
+    private String nombre;
+    private String apellidos;
     private String fotoPerfil;
     private UUID id;
 }

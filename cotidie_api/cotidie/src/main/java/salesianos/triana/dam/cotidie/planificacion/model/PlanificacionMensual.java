@@ -7,6 +7,7 @@ import salesianos.triana.dam.cotidie.tipoActividad.model.TipoActividad;
 import salesianos.triana.dam.cotidie.usuario.model.Usuario;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -35,19 +36,32 @@ public class PlanificacionMensual {
     )
     private UUID id;
 
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
+
     @OneToMany(mappedBy = "planificacion", fetch = FetchType.LAZY)
     private List<TipoActividad> dias = new ArrayList<>();
 
     @ManyToOne
     private Usuario usuario;
 
+    @Override
+    public String toString() {
+        return "PlanificacionMensual{" +
+                "id=" + id +
+                ", fechaInicio=" + fechaInicio +
+                ", fechaFin=" + fechaFin +
+                ", usuario=" + usuario +
+                '}';
+    }
+
     //HELPERS USUARIO//
-    public void addInmobiliariaToUser(Usuario u){
+    public void addPlanificacionToUser(Usuario u){
         this.usuario=u;
         u.getPlanificacionMensual().add(this);
     }
 
-    public void removeInmobiliariaFromUser(Usuario u){
+    public void removePlanificacionFromUser(Usuario u){
         this.usuario=u;
         u.getPlanificacionMensual().remove(this);
     }

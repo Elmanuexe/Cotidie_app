@@ -34,6 +34,7 @@ public class AuthController {
     private final FileService fileService;
     private final UsuarioAuthService usuarioAuthService;
 
+    @CrossOrigin
     @PostMapping("/login")
     public UsuarioLoginDtoResponse login(@RequestBody UsuarioLoginDto dto) {
         Authentication authentication =

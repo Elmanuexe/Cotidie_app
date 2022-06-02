@@ -7,10 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 import salesianos.triana.dam.cotidie.error.exceptions.EntityNotFoundExceptionCustom;
 import salesianos.triana.dam.cotidie.shared.file.service.FileService;
 import salesianos.triana.dam.cotidie.shared.service.BaseService;
-import salesianos.triana.dam.cotidie.usuario.dto.UserBasicInfoDtoConverter;
-import salesianos.triana.dam.cotidie.usuario.dto.UsuarioEditDto;
-import salesianos.triana.dam.cotidie.usuario.dto.UsuarioEditDtoConverter;
-import salesianos.triana.dam.cotidie.usuario.dto.UsuarioPerfilResponse;
+import salesianos.triana.dam.cotidie.tipoActividad.model.dto.TipoActividadDTO;
+import salesianos.triana.dam.cotidie.usuario.dto.*;
 import salesianos.triana.dam.cotidie.usuario.dto.auth.UsuarioRegisterDto;
 import salesianos.triana.dam.cotidie.usuario.dto.auth.UsuarioRegisterDtoConverter;
 import salesianos.triana.dam.cotidie.usuario.model.Role;
@@ -19,8 +17,10 @@ import salesianos.triana.dam.cotidie.usuario.repository.UsuarioRepository;
 import salesianos.triana.dam.cotidie.usuario.service.UsuarioService;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -52,6 +52,11 @@ public class UsuarioServiceImp extends BaseService<Usuario, UUID, UsuarioReposit
         throw new EntityNotFoundExceptionCustom(Usuario.class);
     }
 
+    public List<UserBasicInfoDto> todos(){
+        List<Usuario> usuarios = repository.findAll();
+        List<UserBasicInfoDto> usuariosDTO = usuarios.stream().map(x -> userBasicInfoDtoConverter.userToUserBasicInfoDto(x)).collect(Collectors.toList());
+        return usuariosDTO;
+    }
 
     @Override
     public Usuario save(UsuarioRegisterDto dto, MultipartFile file) throws IOException {

@@ -5,15 +5,18 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import salesianos.triana.dam.cotidie.shared.file.service.FileService;
+import salesianos.triana.dam.cotidie.usuario.dto.UserBasicInfoDto;
 import salesianos.triana.dam.cotidie.usuario.dto.UsuarioEditDto;
 import salesianos.triana.dam.cotidie.usuario.dto.UsuarioPerfilResponse;
 import salesianos.triana.dam.cotidie.usuario.dto.auth.UsuarioLoginDtoResponse;
 import salesianos.triana.dam.cotidie.usuario.dto.auth.UsuarioLoginDtoResponseConverter;
 import salesianos.triana.dam.cotidie.usuario.model.Usuario;
 import salesianos.triana.dam.cotidie.usuario.service.UsuarioService;
+import salesianos.triana.dam.cotidie.usuario.service.impl.UsuarioServiceImp;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -21,7 +24,7 @@ import java.util.UUID;
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-    private final UsuarioService usuarioService;
+    private final UsuarioServiceImp usuarioService;
     private final UsuarioLoginDtoResponseConverter usuarioLoginDtoResponseConverter;
     private final FileService fileService;
 
@@ -35,6 +38,12 @@ public class UsuarioController {
                                                    @Valid @RequestPart ("usuario") UsuarioEditDto dto,
                                                    @RequestPart ("file")MultipartFile file) throws IOException {
         return usuarioLoginDtoResponseConverter.UserAndTokenToUsuarioDtoResponse(usuarioService.save(dto,file,usuario),null);
+    }
+
+    @CrossOrigin
+    @GetMapping("/todos")
+    public List<UserBasicInfoDto> traerTodos (){
+        return usuarioService.todos();
     }
 
 }

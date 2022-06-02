@@ -38,65 +38,101 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.centerRight,
-            end: Alignment.centerLeft,
-            colors: <Color>[Colors.amber, Colors.amberAccent],
-            tileMode: TileMode.mirror,
-          ),
-        ),
-        child: BlocProvider(
-          create: (context) {
-            return RegisterBloc(authRepository);
-          },
-          child: _registerBlocLogic(),
-        ));
+    return BlocProvider(
+      create: (context) {
+        return RegisterBloc(authRepository);
+      },
+      child: _registerBlocLogic(),
+    );
   }
 
   _registerBlocLogic() {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: BlocConsumer<RegisterBloc, RegisterState>(
-        listenWhen: (context, state) {
-          return state is RegisterSuccessState ||
-              state is RegisterErrorState ||
-              state is RegisterImageErrorState ||
-              state is RegisterDateErrorState;
-        },
-        listener: (context, state) {
-          if (state is RegisterSuccessState) {
-            PreferenceUtils.setString("jwtToken", state.loginResponse.tokenJwt);
-            PreferenceUtils.setString("nombre", state.loginResponse.nombre);
-            PreferenceUtils.setString(
-                "apellidos", state.loginResponse.apellidos);
-            PreferenceUtils.setString(
-                "fotoPerfil", state.loginResponse.fotoPerfil);
-            PreferenceUtils.setString("nick", state.loginResponse.nick);
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MenuPage()));
-          } else if (state is RegisterErrorState) {
-            _errorMessage(context, state.message);
-          } else if (state is RegisterImageErrorState) {
-            _errorMessage(context, state.message);
-          }
-        },
-        buildWhen: (context, state) {
-          return state is RegisterImageSuccessState ||
-              state is LoginInitialState ||
-              state is LoginLoadingState;
-        },
-        builder: (context, state) {
-          if (state is LoginLoadingState) {
-            return const CircularProgressIndicator();
-          } else if (state is RegisterImageSuccessState) {
-            file = state.file;
-            return _registerForm(context);
-          } else {
-            return _registerForm(context);
-          }
-        },
+    double widthTotal = MediaQuery.of(context).size.width;
+    double heightTotal = MediaQuery.of(context).size.height;
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: [
+          Colors.orange[700]!,
+          Colors.amber,
+        ],
+      )),
+      child: Scaffold(
+        backgroundColor: Colors.white.withOpacity(0.01),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: widthTotal/10, top: heightTotal/20),
+                        child: Text("Cotidie",
+                            style: style.header, textAlign: TextAlign.left),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+                          Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: widthTotal / 10),
+                  child: Text("Registro",
+                      style: style.subtext, textAlign: TextAlign.left),
+                ),
+              ],
+            ),
+              BlocConsumer<RegisterBloc, RegisterState>(
+                listenWhen: (context, state) {
+                  return state is RegisterSuccessState ||
+                      state is RegisterErrorState ||
+                      state is RegisterImageErrorState ||
+                      state is RegisterDateErrorState;
+                },
+                listener: (context, state) {
+                  if (state is RegisterSuccessState) {
+                    PreferenceUtils.setString(
+                        "jwtToken", state.loginResponse.tokenJwt);
+                    PreferenceUtils.setString(
+                        "nombre", state.loginResponse.nombre);
+                    PreferenceUtils.setString(
+                        "apellidos", state.loginResponse.apellidos);
+                    PreferenceUtils.setString(
+                        "fotoPerfil", state.loginResponse.fotoPerfil);
+                    PreferenceUtils.setString("nick", state.loginResponse.nick);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MenuPage()));
+                  } else if (state is RegisterErrorState) {
+                    _errorMessage(context, state.message);
+                  } else if (state is RegisterImageErrorState) {
+                    _errorMessage(context, state.message);
+                  }
+                },
+                buildWhen: (context, state) {
+                  return state is RegisterImageSuccessState ||
+                      state is LoginInitialState ||
+                      state is LoginLoadingState;
+                },
+                builder: (context, state) {
+                  if (state is LoginLoadingState) {
+                    return const CircularProgressIndicator();
+                  } else if (state is RegisterImageSuccessState) {
+                    file = state.file;
+                    return _registerForm(context);
+                  } else {
+                    return _registerForm(context);
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -104,12 +140,11 @@ class _RegisterPageState extends State<RegisterPage> {
   _registerForm(BuildContext context) {
     double widthTotal = MediaQuery.of(context).size.width;
     double heightTotal = MediaQuery.of(context).size.height;
-
     return Form(
-        child: Center(
       child: Padding(
-        padding: const EdgeInsets.all(40.0),
+        padding: EdgeInsets.only(left: widthTotal/10, right: widthTotal/10, top: heightTotal/50),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
                 margin: const EdgeInsets.only(top: 20),
@@ -128,7 +163,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Colors.transparent, width: 0)),
                       labelText: 'Nombre de usuario',
                       hintText: 'Escriba su nombre de usuario',
-                      labelStyle: TextStyle(fontSize: 17, color: style.grey),
+                      labelStyle:
+                          const TextStyle(fontSize: 20, color: Colors.black87),
+                      hintStyle:
+                          const TextStyle(fontSize: 20, color: Colors.blueGrey),
                       filled: true,
                       fillColor: style.lightestGrey),
                 )),
@@ -148,7 +186,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Colors.transparent, width: 0)),
                       labelText: 'Nombre',
                       hintText: 'Escriba su nombre sin apellidos',
-                      labelStyle: TextStyle(fontSize: 17, color: style.grey),
+                      labelStyle:
+                          const TextStyle(fontSize: 20, color: Colors.black87),
+                      hintStyle:
+                          const TextStyle(fontSize: 20, color: Colors.blueGrey),
                       filled: true,
                       fillColor: style.lightestGrey),
                 )),
@@ -168,7 +209,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Colors.transparent, width: 0)),
                       labelText: 'Apellidos',
                       hintText: 'Escriba sus apellidos',
-                      labelStyle: TextStyle(fontSize: 17, color: style.grey),
+                      labelStyle:
+                          const TextStyle(fontSize: 20, color: Colors.black87),
+                      hintStyle:
+                          const TextStyle(fontSize: 20, color: Colors.blueGrey),
                       filled: true,
                       fillColor: style.lightestGrey),
                 )),
@@ -189,28 +233,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Colors.transparent, width: 0)),
                       labelText: 'Email',
                       hintText: 'Escriba su dirección de email',
-                      labelStyle: TextStyle(fontSize: 17, color: style.grey),
-                      filled: true,
-                      fillColor: style.lightestGrey),
-                )),
-            Container(
-                margin: const EdgeInsets.only(top: 20),
-                height: 50,
-                child: TextField(
-                  controller: telefonoController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25),
-                          borderSide: const BorderSide(
-                              color: Colors.transparent, width: 0)),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25),
-                          borderSide: const BorderSide(
-                              color: Colors.transparent, width: 0)),
-                      labelText: 'Teléfono',
-                      hintText: 'Escriba su número de teléfono',
-                      labelStyle: TextStyle(fontSize: 17, color: style.grey),
+                      labelStyle:
+                          const TextStyle(fontSize: 20, color: Colors.black87),
+                      hintStyle:
+                          const TextStyle(fontSize: 20, color: Colors.blueGrey),
                       filled: true,
                       fillColor: style.lightestGrey),
                 )),
@@ -230,7 +256,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           borderSide: const BorderSide(
                               color: Colors.transparent, width: 0)),
                       labelText: 'Contraseña',
-                      labelStyle: TextStyle(fontSize: 17, color: style.grey),
+                      labelStyle:
+                          const TextStyle(fontSize: 20, color: Colors.black87),
                       filled: true,
                       fillColor: style.lightestGrey),
                 )),
@@ -250,7 +277,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           borderSide: const BorderSide(
                               color: Colors.transparent, width: 0)),
                       labelText: 'Confirmar contraseña',
-                      labelStyle: TextStyle(fontSize: 17, color: style.grey),
+                      labelStyle: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.black87,
+                      ),
                       filled: true,
                       fillColor: style.lightestGrey),
                 )),
@@ -265,18 +295,20 @@ class _RegisterPageState extends State<RegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                        margin: const EdgeInsets.only(left: 5),
                         child: Text(
-                          'Elija una foto de perfil',
-                          style: style.tBlancoG,
-                        ))
+                      'Elija una foto de perfil',
+                      style: style.tBlancoG,
+                    ))
                   ],
                 ),
-                style: ElevatedButton.styleFrom(primary: Colors.amber),
+                style: ElevatedButton.styleFrom(
+                    fixedSize: Size(widthTotal, 40),
+                    shape: StadiumBorder(),
+                    primary: Colors.amber),
               ),
             ),
             Container(
-                margin: const EdgeInsets.only(top: 30),
+                margin: const EdgeInsets.only(top: 20),
                 width: widthTotal - widthTotal / 2,
                 child: ElevatedButton(
                   onPressed: () {
@@ -297,13 +329,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           context, 'Se debe de elegir una imagen de perfil');
                     }
                   },
-                  child: const Text('Registrarse'),
-                  style: ElevatedButton.styleFrom(primary: Colors.amber),
+                  child: Text('Registrarse', style: style.tBlancoG),
+                  style: ElevatedButton.styleFrom(
+                      shape: StadiumBorder(), primary: Colors.amber),
                 )),
           ],
         ),
       ),
-    ));
+    );
   }
 
   void _errorMessage(BuildContext context, message) {

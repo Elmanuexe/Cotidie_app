@@ -3,7 +3,6 @@ package salesianos.triana.dam.cotidie.tipoActividad.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import salesianos.triana.dam.cotidie.ausencia.model.dto.AusenciaDTO;
 import salesianos.triana.dam.cotidie.tipoActividad.model.dto.TipoActividadDTO;
 import salesianos.triana.dam.cotidie.tipoActividad.model.dto.TipoActividadDTOConverter;
 import salesianos.triana.dam.cotidie.tipoActividad.service.TipoActividadService;
@@ -22,13 +21,13 @@ public class TipoActividadController {
     private final UsuarioServiceImp usuarioService;
 
     //@PostMapping("/dia/{id}")
-    @PostMapping("/dia")
+    @PostMapping("/ausencia/dia")
     private TipoActividadDTO nuevaAusencia(@AuthenticationPrincipal Usuario usuario, @RequestBody TipoActividadDTO dto){
         Usuario user = usuarioService.findById(usuario.getId()).get();
-        return dtoConverter.convertAusenciaToDTO(service.save(dto, user));
+        return dtoConverter.convertAusenciaToDTO(service.saveAusencia(dto, user));
     }
 
-    @GetMapping("/dia/hoy")
+    @GetMapping("/ausencia/dia/hoy")
     private List<TipoActividadDTO> todasAusenciasDeUnDia(){
         LocalDate fecha = LocalDate.now();
         return service.findAllByFecha(fecha);

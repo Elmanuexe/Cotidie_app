@@ -1,0 +1,38 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex="50" class="containerImagen">
+    <h1 class="titulo">Cotidie</h1>
+    <img src="..\assets\images\Schedule-rafiki.png" alt="Cotidie_bigLogo" class="imageBigLogo">
+  </div>
+  <div fxFlex="50" class="example-container">
+    <div class="loginContainer">
+      <span>
+        <h2 class="loginH">Inicio de Sesión</h2>
+        <p class="subtext">Si ya eres miembro del sistema puedes iniciar sesión con tu nombre de usuario y contraseña. Si no lo eres todavía, puedes registrarte <a href="http://localhost:4200/register">Aquí</a>
+        </p>
+      </span>
+      <mat-divider></mat-divider>
+      <div class="form-container">
+        <form [formGroup]="loginForm">
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label> Nombre de usuario
+            </mat-label>
+            <input matInput formControlName="nick" required>
+            <mat-error *ngIf="loginForm.controls.nick.touched && loginForm.controls.nick.invalid">
+              <span *ngIf="loginForm.controls.nick.errors">Este campo es requerido.</span>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="form-field" appearance="outline">
+            <mat-label> Contraseña
+            </mat-label>
+            <input matInput formControlName="password" type="password" required>
+            <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+              <span *ngIf="loginForm.controls.password.errors">Este campo es requerido.</span>
+            </mat-error>
+          </mat-form-field>
+          <button mat-raised-button class="button" type="submit" (click)="doLogin()">Iniciar sesión</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -2,8 +2,6 @@ package salesianos.triana.dam.cotidie.tipoActividad.model.dto;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import salesianos.triana.dam.cotidie.ausencia.model.Ausencia;
-import salesianos.triana.dam.cotidie.ausencia.model.dto.AusenciaDTO;
 import salesianos.triana.dam.cotidie.tipoActividad.model.TipoActividad;
 import salesianos.triana.dam.cotidie.usuario.dto.UserBasicInfoDtoConverter;
 
@@ -22,10 +20,12 @@ public class TipoActividadDTOConverter {
                 .build();
     }
 
+
+
     public TipoActividad convertAusenciaToTIpoActividad(TipoActividadDTO dto){
         return TipoActividad.builder()
                 .Descripcion(dto.getDescripcion())
-                .Tipo(dto.getTipo())
+                .tipo(dto.getTipo())
                 .fecha(dto.getFecha())
                 .build();
     }

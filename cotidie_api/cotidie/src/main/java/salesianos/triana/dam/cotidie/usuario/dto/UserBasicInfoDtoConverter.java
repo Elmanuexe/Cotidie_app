@@ -9,7 +9,8 @@ public class UserBasicInfoDtoConverter {
     public UserBasicInfoDto userToUserBasicInfoDto (Usuario usuario){
         return UserBasicInfoDto.builder()
                 .id(usuario.getId())
-                .nick(usuario.getNick())
+                .nombre(usuario.getNombre())
+                .apellidos(usuario.getApellidos())
                 .fotoPerfil(usuario.getFotoPerfil())
                 .build();
     }

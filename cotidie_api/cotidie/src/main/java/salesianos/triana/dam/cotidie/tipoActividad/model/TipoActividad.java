@@ -35,7 +35,7 @@ public class TipoActividad {
     )
     private UUID id;
 
-    private Enum Tipo;
+    private Tipo tipo;
     private LocalDate fecha;
     private String Descripcion;
     private LocalDateTime horaInicio;
@@ -44,6 +44,19 @@ public class TipoActividad {
 
     @ManyToOne
     private PlanificacionMensual planificacion;
+
+    @Override
+    public String toString() {
+        return "TipoActividad{" +
+                "id=" + id +
+                ", tipo=" + tipo +
+                ", fecha=" + fecha +
+                ", Descripcion='" + Descripcion + '\'' +
+                ", horaInicio=" + horaInicio +
+                ", horaFIn=" + horaFIn +
+                ", todoElDia=" + todoElDia +
+                '}';
+    }
 
     //HELPERS PLANIFICACION//
     public void addDiaToPlanificacion(PlanificacionMensual u){

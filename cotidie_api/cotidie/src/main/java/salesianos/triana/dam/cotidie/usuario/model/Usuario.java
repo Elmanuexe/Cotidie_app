@@ -9,7 +9,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import salesianos.triana.dam.cotidie.ausencia.model.Ausencia;
 import salesianos.triana.dam.cotidie.notificacion.model.Notificacion;
 import salesianos.triana.dam.cotidie.planificacion.model.PlanificacionMensual;
 import salesianos.triana.dam.cotidie.vacacion.model.Vacacion;
@@ -44,7 +43,7 @@ public class Usuario implements Serializable, UserDetails {
             }
     )
     private UUID id;
-    private String nombre,apellidos,email,telefono;
+    private String nombre,apellidos,email;
     private String fotoPerfil;
 
     @NaturalId
@@ -64,10 +63,6 @@ public class Usuario implements Serializable, UserDetails {
 
 
     //ASOCIACIONES//
-
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
-    private List<Ausencia> ausencias = new ArrayList<>();
-
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<Vacacion> vacaciones = new ArrayList<>();
 
@@ -85,7 +80,7 @@ public class Usuario implements Serializable, UserDetails {
 
     @Override
     public String getUsername() {
-        return nick;
+        return nombre+" "+apellidos;
     }
 
     @Override

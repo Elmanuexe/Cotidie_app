@@ -22,7 +22,6 @@ public class UsuarioRegisterDtoConverter {
                 .password(codificador.encode(dto.getPassword()))
                 .role(role)
                 .fotoPerfil(dto.getFotoPerfil())
-                .telefono(dto.getTelefono())
                 .build();
     }
 }

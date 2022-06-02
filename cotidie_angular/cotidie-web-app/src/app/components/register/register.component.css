@@ -1,0 +1,61 @@
+.example-container{
+  text-align: center
+}
+
+.form-container{
+  width: 50%;
+  margin: auto;
+  margin-top: 5%;
+}
+
+.form-field{
+  justify-content:center;
+  display: flex;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.containerImagen {
+  background: #E07132;
+  height: 100vh;
+}
+
+.loginContainer{
+  margin-right: 25%;
+  margin-left: 25%;
+}
+
+.subtext{
+  color: gray;
+  text-align: left;
+}
+
+.button{
+  background-color: #FFC100;
+  color: white;
+}
+
+.loginH{
+  text-align: left;
+  font-weight: bolder;
+  font-size: xx-large;
+}
+
+.titulo{
+  margin-left: 5%;
+  margin-top: 5%;
+  color: white;
+  font-weight: bolder;
+  font-size: xx-large;
+  font-family: 'Poppins', sans-serif;
+}
+
+.imageBigLogo{
+  height: 70vh;
+  display: block;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+}
