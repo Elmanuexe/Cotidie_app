@@ -1,24 +1,26 @@
 <div fxLayout="row" fxLayoutAlign="start center">
-  <mat-drawer-container class="example-container">
-    <div fxLayout="column" fxLayoutAlign="start center">
-      <div>
-        <a href="http://localhost:4200/home">
-          <mat-icon aria-hidden="false" class="color-icon" aria-label="Example home icon"  matTooltip="Lista de Usuarios">home</mat-icon>
-        </a>
-      </div>
-      <div>
-        <a href="http://localhost:4200/ausencias">
-          <mat-icon aria-hidden="false" class="color-icon" aria-label="Example warning icon" matTooltip="Ausencias">warning</mat-icon>
-        </a>
-      </div>
-    </div>
-  </mat-drawer-container>
-
-
-  <mat-selection-list class="list-container" #shoes [multiple]="false">
-    <mat-list-option fxLayout="row" fxLayoutAlign="start center" class="list-item" *ngFor="let usuario of usuarios"
+  <app-sidenav></app-sidenav>
+  <mat-selection-list class="list-container" #users [multiple]="false">
+    <mat-list-option class="list-item" style="height: 70px;" *ngFor="let usuario of usuarios"
       [value]="usuario">
-        <div fxLayout="row" fxLayoutAlign="start center" class="float"><img class="pfp" src={{usuario.fotoPerfil}} alt=""> <span>{{usuario.nombre}} {{usuario.apellidos}}</span> </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="float"><img class="pfp" src={{usuario.fotoPerfil}} alt="">
+        <span class="space-between">{{usuario.nombre}} {{usuario.apellidos}}</span>
+        <span class="space-between">Turno (TBI)</span>
+        <span>
+        <a href="http://localhost:4200/ausencias">
+          <mat-icon aria-hidden="false" class="color-icon-black" aria-label="Example warning icon"
+            matTooltip="Ausencias">warning</mat-icon>
+        </a>
+        <a href="http://localhost:4200/ausencias">
+          <mat-icon aria-hidden="false" class="color-icon-black" aria-label="Example flight_takeoff icon"
+            matTooltip="Vacaciones">flight_takeoff</mat-icon>
+        </a>
+        <a href="http://localhost:4200/ausencias">
+          <mat-icon aria-hidden="false" class="color-icon-black" aria-label="Example calendar_month icon"
+            matTooltip="Planificacion mensual">calendar_month</mat-icon>
+        </a>
+      </span>   
+      </div>
     </mat-list-option>
   </mat-selection-list>
 </div>

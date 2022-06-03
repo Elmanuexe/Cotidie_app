@@ -18,7 +18,7 @@ public class TipoActividadDTO {
     private LocalDate fecha;
     private String descripcion;
     private LocalDateTime horaInicio;
-    private LocalDateTime horaFIn;
+    private LocalDateTime horaFin;
     private Boolean todoElDia;
     private UserBasicInfoDto usuario;
 
@@ -29,7 +29,7 @@ public class TipoActividadDTO {
                 ", fecha=" + fecha +
                 ", descripcion='" + descripcion + '\'' +
                 ", horaInicio=" + horaInicio +
-                ", horaFIn=" + horaFIn +
+                ", horaFIn=" + horaFin +
                 ", todoElDia=" + todoElDia +
                 ", usuario=" + usuario +
                 '}';

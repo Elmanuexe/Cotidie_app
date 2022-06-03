@@ -14,6 +14,8 @@ public class TipoActividadDTOConverter {
     public TipoActividadDTO convertAusenciaToDTO (TipoActividad a){
         return TipoActividadDTO.builder()
                 .fecha(a.getFecha())
+                .horaInicio(a.getHoraInicio())
+                .horaFin(a.getHoraFIn())
                 .descripcion(a.getDescripcion())
                 .usuario(userBasicInfoDtoConverter.userToUserBasicInfoDto(a.getPlanificacion().getUsuario()))
                 .tipo(a.getTipo())
@@ -24,7 +26,9 @@ public class TipoActividadDTOConverter {
 
     public TipoActividad convertAusenciaToTIpoActividad(TipoActividadDTO dto){
         return TipoActividad.builder()
-                .Descripcion(dto.getDescripcion())
+                .descripcion(dto.getDescripcion())
+                .horaInicio(dto.getHoraInicio())
+                .horaFIn(dto.getHoraFin())
                 .tipo(dto.getTipo())
                 .fecha(dto.getFecha())
                 .build();

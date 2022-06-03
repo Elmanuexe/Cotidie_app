@@ -59,8 +59,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/h2-console").permitAll()
                 .antMatchers("/auth/**").permitAll()
+                .antMatchers("/ausencia/dia/hoy").permitAll()
                 .antMatchers("/ausencia/**").authenticated()
-                .antMatchers("/ausencia/dia/hoy").hasRole(String.valueOf(Role.ADMIN))
                 .anyRequest().permitAll();
 
         http.addFilterBefore(filtroSeguridad, UsernamePasswordAuthenticationFilter.class);

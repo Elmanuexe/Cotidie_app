@@ -37,7 +37,7 @@ public class TipoActividad {
 
     private Tipo tipo;
     private LocalDate fecha;
-    private String Descripcion;
+    private String descripcion;
     private LocalDateTime horaInicio;
     private LocalDateTime horaFIn;
     private Boolean todoElDia;
@@ -51,7 +51,7 @@ public class TipoActividad {
                 "id=" + id +
                 ", tipo=" + tipo +
                 ", fecha=" + fecha +
-                ", Descripcion='" + Descripcion + '\'' +
+                ", Descripcion='" + descripcion + '\'' +
                 ", horaInicio=" + horaInicio +
                 ", horaFIn=" + horaFIn +
                 ", todoElDia=" + todoElDia +

@@ -13,4 +13,7 @@ public interface TipoActividadRepository extends JpaRepository<TipoActividad, UU
 
     @Query("SELECT a FROM TipoActividad a WHERE a.fecha=:fecha AND a.tipo = 2")
     List<TipoActividad> findAllAusenciasByFecha(@Param("fecha") LocalDate fecha);
+
+    @Query(value = "SELECT * FROM tipo_actividad a JOIN planificacion p ON a.planificacion_id = p.id JOIN usuario u ON p.usuario_id = u.id WHERE u.id=:usuario_id AND a.tipo= 2", nativeQuery = true)
+    List<TipoActividad> findAllAusenciasByUsuario(@Param("usuario_id") UUID usuario_id);
 }

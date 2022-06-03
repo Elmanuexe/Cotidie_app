@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { LoginDTO } from 'src/app/models/login';
 import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment.prod';
 
 
 @Component({
@@ -42,6 +43,7 @@ export class LoginComponent implements OnInit {
   doLogin(): void {
     this.dto = this.loginForm.value;
     this.authService.login(this.dto).subscribe((resp) => {
+      localStorage.setItem('token', resp.tokenJwt);
       this.router.navigate(['/home']);
     });
   }

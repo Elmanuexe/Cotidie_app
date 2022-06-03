@@ -1,0 +1,53 @@
+.example-container {
+    width: 3vw;
+    height: 100vh;
+    background-color: #E07132;
+  }
+  
+  .color-icon{
+    color: whitesmoke;
+    padding-top: 1vh;
+  }
+  
+  .list-item{
+    border: 1px solid gray;
+    border-radius: 15px;
+    margin-top: 2vh;
+    height: 70px;
+    font-size: 18px;
+    font-family: Poppins;
+  }
+  
+  .icon-green{
+    color: green;
+    margin-right: 2vw;
+  }
+  
+  .icon-red{
+    color: red;
+    margin-right: 2vw;
+  }
+
+  .list-container{
+    width: 93vw;
+    height: 99vh;
+    margin: auto;
+  }
+  
+  .pfp{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: inline;
+    margin-left: 2vw;
+    margin-right: 2vw;
+  }
+  
+  .float{
+    display: inline;
+  }
+  
+  .space-between{
+    margin-left: 2vw;
+    margin-right: 4vw;
+  }

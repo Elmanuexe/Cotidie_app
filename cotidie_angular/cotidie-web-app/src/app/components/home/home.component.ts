@@ -9,8 +9,8 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class HomeComponent implements OnInit {
 
-  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   usuarios?: Listausuarios;
+
 
   constructor(
     private service: UsuarioService

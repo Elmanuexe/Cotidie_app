@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AusenciasComponent } from './components/ausencias/ausencias.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AusenciasComponent } from './components/ausencias/ausencias.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    AusenciasComponent
+    AusenciasComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,7 @@ import { AusenciasComponent } from './components/ausencias/ausencias.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -41,4 +41,10 @@ public class TipoActividadService extends BaseService<TipoActividad, UUID, TipoA
         List<TipoActividadDTO> ausenciaDTOS =ausencias.stream().map(x -> dtoConverter.convertAusenciaToDTO(x)).collect(Collectors.toList());
         return ausenciaDTOS;
     }
+
+    public List<TipoActividadDTO> findAllByUsuario(UUID id){
+        List<TipoActividad> ausencias = repository.findAllAusenciasByUsuario(id);
+        List<TipoActividadDTO> ausenciaDTOS =ausencias.stream().map(x -> dtoConverter.convertAusenciaToDTO(x)).collect(Collectors.toList());
+        return ausenciaDTOS;
+    }
 }

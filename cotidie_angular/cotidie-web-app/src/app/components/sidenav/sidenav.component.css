@@ -1,0 +1,10 @@
+.example-container {
+    width: 3vw;
+    height: 100vh;
+    background-color: #E07132;
+}
+
+.color-icon {
+    color: whitesmoke;
+    padding-top: 1vh;
+}

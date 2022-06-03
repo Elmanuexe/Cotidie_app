@@ -1,1 +1,23 @@
-<p>ausencias works!</p>
+<div fxLayout="row" fxLayoutAlign="start center">
+    <app-sidenav></app-sidenav>
+    <mat-selection-list class="list-container" #users [multiple]="false">
+        <mat-list-option class="list-item" style="height: 70px;" *ngFor="let ausencia of ausencias" [value]="ausencia">
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="float">
+                <img class="pfp" src={{ausencia.usuario.fotoPerfil}} alt="">
+                <span class="space-between">{{ausencia.usuario.nombre}} {{ausencia.usuario.apellidos}}</span>
+                <span class="space-between">Hora de inicio: {{ausencia.horaInicio}}</span>
+                <span class="space-between">Hora de fin: {{ausencia.horaFin}}</span>
+                <span class="space-between">Todo el día: </span>
+                <span class="space-between" *ngIf="ausencia.todoElDia">
+                    <mat-icon aria-hidden="false" class="icon-green" aria-label="Example check_circle icon">check_circle</mat-icon>
+                </span>
+                <span class="space-between" *ngIf="!ausencia.todoElDia">
+                    <mat-icon aria-hidden="false" class="icon-red" aria-label="Example check_circle icon">cancel</mat-icon>
+                </span>
+                <span>
+
+                </span>
+            </div>
+        </mat-list-option>
+    </mat-selection-list>
+</div>

@@ -3,3 +3,5 @@ export const environment = {
   apiBaseUrl: 'http://localhost:8080',
   webBaseUrl: 'http://localhost:4200'
 };
+
+const api = 'http://localhost:8080'
