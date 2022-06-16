@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "682537f6-cd03-4f0b-bbed-d222233499f8",
 		"name": "Cotidie",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17654610"
 	},
 	"item": [
 		{
@@ -30,14 +31,14 @@
 							"formdata": [
 								{
 									"key": "usuario",
-									"value": "{\"nick\":\"Manu\",\"email\":\"manufernarjona1@gmail.com\",\"nombre\":\"Manuel\",\"apellidos\":\"Fernandez Arjona\", \"password\":\"contraseñasegura\",\"password2\":\"contraseñasegura\"}",
+									"value": "{\"nick\":\"Manuexe\",\"email\":\"manufernarjona1@gmail.com\",\"nombre\":\"Manuel\",\"apellidos\":\"Fernandez Arjona\", \"password\":\"contraseñasegura\",\"password2\":\"contraseñasegura\"}",
 									"contentType": "application/json",
 									"type": "text"
 								},
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/fernandez.arman20/Pictures/unnamed.jpg"
+									"src": "/D:/Clase/miarmaMFA/imagenes/relajao.jpg"
 								}
 							]
 						},
@@ -65,7 +66,8 @@
 							"script": {
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"token\", jsonData.tokenJwt);"
+									"pm.collectionVariables.set(\"token\", jsonData.tokenJwt);\r",
+									"pm.collectionVariables.set(\"usuario_id\", jsonData.id);"
 								],
 								"type": "text/javascript"
 							}
@@ -79,14 +81,14 @@
 							"formdata": [
 								{
 									"key": "usuario",
-									"value": "{\"nick\":\"Manu\",\"email\":\"manufernarjona1@gmail.com\",\"nombre\":\"Manuel\",\"apellidos\":\"Fernandez Arjona\", \"password\":\"contraseñasegura\",\"password2\":\"contraseñasegura\"}",
+									"value": "{\"nick\":\"Manu\",\"email\":\"manufernarjona1@gmail.com\",\"nombre\":\"Manuel\",\"apellidos\":\"Fernandez Arjona\", \"password\":\"contraseñasegura\",\"password2\":\"contraseñasegura\",\"telefono\":\"635648405\"}",
 									"contentType": "application/json",
 									"type": "text"
 								},
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/fernandez.arman20/Pictures/unnamed.jpg"
+									"src": "/C:/Users/fernandez.arman20/Desktop/miarmaMFA/imagenes/avatar.jpg"
 								}
 							]
 						},
@@ -114,7 +116,8 @@
 							"script": {
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);\r",
-									"pm.collectionVariables.set(\"token\", jsonData.token);"
+									"pm.collectionVariables.set(\"token\", jsonData.tokenJwt);\r",
+									"pm.collectionVariables.set(\"usuario_id\", jsonData.id);"
 								],
 								"type": "text/javascript"
 							}
@@ -200,6 +203,320 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Traer todos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/usuario/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ausencia",
+			"item": [
+				{
+					"name": "Nueva Ausencia",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fecha\":\"2022-06-14\",\"descripcion\":\"Cita Médico\", \"horaInicio\":\"2022-06-03T10:30:00\", \"horaFin\":\"2022-06-03T12:30:00\", \"todoElDia\":true}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/ausencia/dia",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ausencia",
+								"dia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Todas las de hoy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fecha\":\"2022-05-25\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/ausencia/dia/hoy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ausencia",
+								"dia",
+								"hoy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Todas las ausencias de un usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/ausencia/usuario/{{usuario_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ausencia",
+								"usuario",
+								"{{usuario_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Turno",
+			"item": [
+				{
+					"name": "Nuevo turno",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"turno_id\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fecha\":\"2022-07-12\",\"descripcion\":\"Turno de noche\", \"horaInicio\":\"2022-06-03T10:30:00\", \"horaFin\":\"2022-06-03T12:30:00\", \"todoElDia\":false}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/turno/dia/{{usuario_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"turno",
+								"dia",
+								"{{usuario_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "El turno de hoy de un usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/turno/dia/hoy/usuario/{{usuario_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"turno",
+								"dia",
+								"hoy",
+								"usuario",
+								"{{usuario_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Un turno por la id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/turno/{{turno_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"turno",
+								"{{turno_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Planificacion",
+			"item": [
+				{
+					"name": "La planificacion de un mes de un usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/plan/esteMes/usuario/{{usuario_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"plan",
+								"esteMes",
+								"usuario",
+								"{{usuario_id}}"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
@@ -211,6 +528,14 @@
 		},
 		{
 			"key": "tokenJwt",
+			"value": ""
+		},
+		{
+			"key": "usuario_id",
+			"value": ""
+		},
+		{
+			"key": "turno_id",
 			"value": ""
 		}
 	]

@@ -9,7 +9,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import salesianos.triana.dam.cotidie.notificacion.model.Notificacion;
 import salesianos.triana.dam.cotidie.planificacion.model.PlanificacionMensual;
 
 import javax.persistence.*;
@@ -59,9 +58,6 @@ public class Usuario implements Serializable, UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
-    private List<Notificacion> notificaciones = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<PlanificacionMensual> planificacionMensual = new ArrayList<>();
