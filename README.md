@@ -8,16 +8,14 @@ Se trata de una aplicación para gestionar los turnos de los empleados de una em
 
 ## Características
 
-- Capacidad de asignar turnos automáticamente y manualmente (web)
-- Opción de rechazar o aceptar peticiones de vacaciones (web)
-- Opción de agregar notas propias a modo de diario personal o calendario (movil)
-- Petición de vacaciones integrada (movil)
+- Capacidad de asignar turnos manualmente (web)
+- Visualización de turnos y de calendario del usuario (web y movil)
 - Notifiación de ausencia integrada (movil)
 
 
 ## Appendix
 
-Any additional information goes here
+- [Presentacion](https://cdn.discordapp.com/attachments/787363155494830091/987065013833461760/Presentacion_Cotidie.pdf)
 
 
 ## Autores
