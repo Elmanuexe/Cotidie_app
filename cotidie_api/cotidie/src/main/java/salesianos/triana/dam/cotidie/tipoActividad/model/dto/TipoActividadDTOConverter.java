@@ -11,26 +11,39 @@ public class TipoActividadDTOConverter {
 
     private final UserBasicInfoDtoConverter userBasicInfoDtoConverter;
 
-    public TipoActividadDTO convertAusenciaToDTO (TipoActividad a){
+    public TipoActividadDTO convertActividadToDTO(TipoActividad a){
         return TipoActividadDTO.builder()
                 .fecha(a.getFecha())
                 .horaInicio(a.getHoraInicio())
                 .horaFin(a.getHoraFIn())
                 .descripcion(a.getDescripcion())
+                .todoElDia(a.getTodoElDia())
                 .usuario(userBasicInfoDtoConverter.userToUserBasicInfoDto(a.getPlanificacion().getUsuario()))
                 .tipo(a.getTipo())
                 .build();
     }
 
-
-
-    public TipoActividad convertAusenciaToTIpoActividad(TipoActividadDTO dto){
+    public TipoActividad convertActividadDTOToTipoActividad(TipoActividadDTO dto){
         return TipoActividad.builder()
                 .descripcion(dto.getDescripcion())
                 .horaInicio(dto.getHoraInicio())
                 .horaFIn(dto.getHoraFin())
+                .todoElDia(dto.getTodoElDia())
                 .tipo(dto.getTipo())
                 .fecha(dto.getFecha())
                 .build();
     }
+
+    public BasicActividadDTO convertActividadToBasicDTO(TipoActividad a){
+        return BasicActividadDTO.builder()
+                .id(a.getId())
+                .fecha(a.getFecha())
+                .horaInicio(a.getHoraInicio())
+                .horaFin(a.getHoraFIn())
+                .descripcion(a.getDescripcion())
+                .todoElDia(a.getTodoElDia())
+                .tipo(a.getTipo())
+                .build();
+    }
+
 }

@@ -5,6 +5,7 @@ import 'package:cotidie_mobile_app/models/auth/login_response.dart';
 import 'package:cotidie_mobile_app/models/auth/login_dto.dart';
 import 'package:cotidie_mobile_app/repository/auth_repository.dart';
 import 'package:cotidie_mobile_app/utils/const.dart';
+import 'package:cotidie_mobile_app/utils/preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:http_parser/http_parser.dart';
@@ -19,6 +20,7 @@ class AuthRepositoryImpl extends AuthRepository {
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(loginDto.toJson()));
     if (response.statusCode == 200) {
+
       return LoginResponse.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Credenciales incorrectos');

@@ -1,6 +1,6 @@
-export type AusenciaList = Ausencia[]
+export type AusenciaList = Actividad[]
 
-export interface Ausencia{
+export interface Actividad{
   tipo: string
   fecha: string
   descripcion: string

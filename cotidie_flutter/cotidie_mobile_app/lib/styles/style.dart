@@ -14,8 +14,14 @@ class style {
   static TextStyle header = TextStyle(
     fontSize: 40, fontWeight: FontWeight.w900, color: Colors.blue[900]
   );
+  static TextStyle header_card = const TextStyle(
+    fontSize: 30, fontWeight: FontWeight.w900
+  );
   static TextStyle subtext = const TextStyle(
     fontSize: 20, fontWeight: FontWeight.w400, color: Colors.white);
+
+  static TextStyle subtextblack = const TextStyle(
+    fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black);
 
   static TextStyle login = TextStyle(
       fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blue[900]);

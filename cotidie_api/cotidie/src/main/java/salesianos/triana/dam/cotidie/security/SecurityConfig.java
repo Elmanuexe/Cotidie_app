@@ -4,6 +4,7 @@ package salesianos.triana.dam.cotidie.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -58,9 +59,11 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/h2-console").permitAll()
-                .antMatchers("/auth/**").permitAll()
-                .antMatchers("/ausencia/dia/hoy").permitAll()
-                .antMatchers("/ausencia/**").authenticated()
+                .antMatchers(HttpMethod.POST,"/auth/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/turno/**").authenticated()
+                .antMatchers(HttpMethod.GET,"/ausencia/**").authenticated()
+                .antMatchers(HttpMethod.GET,"/plan/**").authenticated()
+                .antMatchers(HttpMethod.POST,"/ausencia/**").authenticated()
                 .anyRequest().permitAll();
 
         http.addFilterBefore(filtroSeguridad, UsernamePasswordAuthenticationFilter.class);

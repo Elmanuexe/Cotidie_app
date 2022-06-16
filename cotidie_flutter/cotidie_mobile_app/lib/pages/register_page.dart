@@ -1,7 +1,6 @@
 import 'package:cotidie_mobile_app/blocs/login_bloc/login_bloc.dart';
 import 'package:cotidie_mobile_app/blocs/register_bloc/register_bloc.dart';
 import 'package:cotidie_mobile_app/models/auth/register_dto.dart';
-import 'package:cotidie_mobile_app/pages/menu_page.dart';
 import 'package:cotidie_mobile_app/repository/auth_repository.dart';
 import 'package:cotidie_mobile_app/repository/imp/auth_repository_impl.dart';
 import 'package:cotidie_mobile_app/styles/style.dart';
@@ -9,6 +8,8 @@ import 'package:cotidie_mobile_app/utils/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'home_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -107,7 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         "fotoPerfil", state.loginResponse.fotoPerfil);
                     PreferenceUtils.setString("nick", state.loginResponse.nick);
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MenuPage()));
+                        MaterialPageRoute(builder: (context) => const homePage()));
                   } else if (state is RegisterErrorState) {
                     _errorMessage(context, state.message);
                   } else if (state is RegisterImageErrorState) {

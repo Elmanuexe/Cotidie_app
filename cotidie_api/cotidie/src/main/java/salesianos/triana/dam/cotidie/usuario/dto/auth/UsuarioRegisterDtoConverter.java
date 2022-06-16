@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import salesianos.triana.dam.cotidie.usuario.model.Role;
 import salesianos.triana.dam.cotidie.usuario.model.Usuario;
 
+import java.util.ArrayList;
+
 @Component
 public class UsuarioRegisterDtoConverter {
 
@@ -20,6 +22,7 @@ public class UsuarioRegisterDtoConverter {
                 .email(dto.getEmail())
                 .nick(dto.getNick())
                 .password(codificador.encode(dto.getPassword()))
+                .planificacionMensual(new ArrayList<>())
                 .role(role)
                 .fotoPerfil(dto.getFotoPerfil())
                 .build();

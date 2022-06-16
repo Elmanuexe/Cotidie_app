@@ -6,5 +6,6 @@
 
 .color-icon {
     color: whitesmoke;
-    padding-top: 1vh;
+    margin-top: 3vh;
+    transform: scale(1.5);
 }

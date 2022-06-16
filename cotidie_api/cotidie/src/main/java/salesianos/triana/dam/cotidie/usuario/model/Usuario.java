@@ -11,7 +11,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import salesianos.triana.dam.cotidie.notificacion.model.Notificacion;
 import salesianos.triana.dam.cotidie.planificacion.model.PlanificacionMensual;
-import salesianos.triana.dam.cotidie.vacacion.model.Vacacion;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -60,11 +59,6 @@ public class Usuario implements Serializable, UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-
-    //ASOCIACIONES//
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
-    private List<Vacacion> vacaciones = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private List<Notificacion> notificaciones = new ArrayList<>();

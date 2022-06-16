@@ -1,0 +1,66 @@
+<div fxLayout="row" fxLayoutAlign="start center">
+  <app-sidenav></app-sidenav>
+  <mat-selection-list class="list-container" #lista [multiple]="false">
+    <button mat-raised-button class="button" type="submit" (click)="openNuevoDialog()">Nuevo evento</button>
+    <mat-list-option class="list-item" style="height: 70px;" *ngFor="let actividad of planificacion.eventos"
+      [value]="actividad">
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="float" (click)="openEditarDialog(actividad.id)">
+
+        <span class="space-between">{{actividad.fecha}}</span>
+        <span [ngSwitch]="actividad.tipo">
+
+          <span *ngSwitchCase="'TRABAJO'">
+            <span [ngSwitch]="actividad.descripcion">
+              <span *ngSwitchCase="'Turno de mañana'">
+                <span class="mañana">
+                  <span class="space-between anchura">Tipo: {{actividad.tipo}}</span>
+                  <span class="space-between anchura">Detalle: {{actividad.descripcion}}</span>
+                </span>
+              </span>
+
+              <span *ngSwitchCase="'Turno de tarde'">
+                <span class="tarde">
+                  <span class="space-between anchura">Tipo: {{actividad.tipo}}</span>
+                  <span class="space-between anchura">Detalle: {{actividad.descripcion}}</span>
+                </span>
+              </span>
+
+              <span *ngSwitchCase="'Turno de noche'">
+                <span class="noche">
+                  <span class="space-between anchura">Tipo: {{actividad.tipo}}</span>
+                  <span class="space-between anchura">Detalle: {{actividad.descripcion}}</span>
+                </span>
+              </span>
+            </span>
+          </span>
+
+          <span *ngSwitchCase="'AUSENCIA'">
+            <span class="ausencia">
+              <span class="space-between anchura">Tipo: {{actividad.tipo}}</span>
+              <span class="space-between anchura">Detalle: {{actividad.descripcion}}</span>
+            </span>
+          </span>
+
+          <span *ngSwitchCase="'VACACION'">
+            <span class="vacacion">
+              <span class="space-between anchura">Tipo: {{actividad.tipo}}</span>
+              <span class="space-between anchura">Detalle: {{actividad.descripcion}}</span>
+            </span>
+          </span>
+        </span>
+        <span class="space-between">Hora de inicio: {{actividad.horaInicio}}</span>
+        <span class="space-between">Hora de fin: {{actividad.horaFin}}</span>
+        <span class="space-between">Todo el día: </span>
+        <span *ngIf="actividad.todoElDia">
+          <mat-icon aria-hidden="false" class="icon-green" aria-label="Example check_circle icon">check_circle
+          </mat-icon>
+        </span>
+        <span *ngIf="!actividad.todoElDia">
+          <mat-icon aria-hidden="false" class="icon-red" aria-label="Example check_circle icon">cancel</mat-icon>
+        </span>
+        <span>
+        </span>
+      </div>
+    </mat-list-option>
+  </mat-selection-list>
+</div>

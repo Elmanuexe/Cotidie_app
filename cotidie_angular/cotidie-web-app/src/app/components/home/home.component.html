@@ -5,21 +5,17 @@
       [value]="usuario">
       <div fxLayout="row" fxLayoutAlign="space-between center" class="float"><img class="pfp" src={{usuario.fotoPerfil}} alt="">
         <span class="space-between">{{usuario.nombre}} {{usuario.apellidos}}</span>
-        <span class="space-between">Turno (TBI)</span>
         <span>
-        <a href="http://localhost:4200/ausencias">
-          <mat-icon aria-hidden="false" class="color-icon-black" aria-label="Example warning icon"
-            matTooltip="Ausencias">warning</mat-icon>
-        </a>
-        <a href="http://localhost:4200/ausencias">
-          <mat-icon aria-hidden="false" class="color-icon-black" aria-label="Example flight_takeoff icon"
-            matTooltip="Vacaciones">flight_takeoff</mat-icon>
-        </a>
-        <a href="http://localhost:4200/ausencias">
-          <mat-icon aria-hidden="false" class="color-icon-black" aria-label="Example calendar_month icon"
-            matTooltip="Planificacion mensual">calendar_month</mat-icon>
-        </a>
-      </span>   
+          <button mat-icon-button aria-label="button warning icon" class="color-icon-black" matTooltip="Ausencias" (click)="goToAusenciaUser(usuario.id)">
+            <mat-icon>warning</mat-icon>
+          </button>
+          <button mat-icon-button aria-label="button flight icon" class="color-icon-black" matTooltip="Vacaciones" (click)="goToVacacionUser(usuario.id)">
+            <mat-icon>flight_takeoff</mat-icon>
+          </button>
+          <button mat-icon-button aria-label="button calendar icon" class="color-icon-black" matTooltip="Actividades" (click)="goToCalendarUser(usuario.id)">
+            <mat-icon>calendar_month</mat-icon>
+          </button>
+      </span>
       </div>
     </mat-list-option>
   </mat-selection-list>

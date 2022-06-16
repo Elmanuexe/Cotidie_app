@@ -4,7 +4,6 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import salesianos.triana.dam.cotidie.planificacion.model.PlanificacionMensual;
-import salesianos.triana.dam.cotidie.usuario.model.Usuario;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -51,7 +50,7 @@ public class TipoActividad {
                 "id=" + id +
                 ", tipo=" + tipo +
                 ", fecha=" + fecha +
-                ", Descripcion='" + descripcion + '\'' +
+                ", descripcion='" + descripcion + '\'' +
                 ", horaInicio=" + horaInicio +
                 ", horaFIn=" + horaFIn +
                 ", todoElDia=" + todoElDia +
@@ -61,11 +60,11 @@ public class TipoActividad {
     //HELPERS PLANIFICACION//
     public void addDiaToPlanificacion(PlanificacionMensual u){
         this.planificacion=u;
-        u.getDias().add(this);
+        u.getEventos().add(this);
     }
 
     public void removeDiaFromPlanificacion(PlanificacionMensual u){
         this.planificacion=u;
-        u.getDias().remove(this);
+        u.getEventos().remove(this);
     }
 }

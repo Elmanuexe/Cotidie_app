@@ -1,0 +1,51 @@
+<ng-container *ngIf="actividad">
+  <form [formGroup]="actForm">
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label> Detalle de la actividad
+      </mat-label>
+      <select matNativeControl required formControlName="descripcion" [(ngModel)]="actividad.descripcion">
+        <option value="Turno de mañana">Turno de mañana</option>
+        <option value="Turno de tarde">Turno de tarde</option>
+        <option value="Turno de noche">Turno de noche</option>
+      </select>
+    </mat-form-field>
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>Fecha de la actividad</mat-label>
+      <input matInput [matDatepicker]="picker" required>
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div>
+      <mat-checkbox class="form-field margenTop" formControlName="todoElDia">Todo el día</mat-checkbox>
+    </div>
+
+    <button mat-raised-button class="button" type="submit" (click)="crear()">Editar</button>
+    <button mat-raised-button class="button" type="submit" (click)="borrar()">Borrar</button>
+  </form>
+</ng-container>
+
+<ng-container *ngIf="!actividad">
+  <form [formGroup]="actForm">
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label> Detalle de la actividad
+      </mat-label>
+      <select matNativeControl required formControlName="descripcion">
+        <option value="Turno de mañana">Turno de mañana</option>
+        <option value="Turno de tarde">Turno de tarde</option>
+        <option value="Turno de noche">Turno de noche</option>
+      </select>
+    </mat-form-field>
+    <mat-form-field class="form-field" appearance="fill">
+      <mat-label>Fecha de la actividad</mat-label>
+      <input matInput [matDatepicker]="picker" required formControlName="fecha">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div>
+      <mat-checkbox class="form-field margenTop" formControlName="todoElDia">Todo el día</mat-checkbox>
+    </div>
+    <button mat-raised-button class="button" type="submit" (click)="crear()">Crear</button>
+  </form>
+</ng-container>

@@ -7,6 +7,7 @@ import salesianos.triana.dam.cotidie.planificacion.service.PlanificacionService;
 import salesianos.triana.dam.cotidie.shared.service.BaseService;
 import salesianos.triana.dam.cotidie.tipoActividad.model.Tipo;
 import salesianos.triana.dam.cotidie.tipoActividad.model.TipoActividad;
+import salesianos.triana.dam.cotidie.tipoActividad.model.dto.BasicActividadDTO;
 import salesianos.triana.dam.cotidie.tipoActividad.model.dto.TipoActividadDTO;
 import salesianos.triana.dam.cotidie.tipoActividad.model.dto.TipoActividadDTOConverter;
 import salesianos.triana.dam.cotidie.tipoActividad.repository.TipoActividadRepository;
@@ -27,24 +28,40 @@ public class TipoActividadService extends BaseService<TipoActividad, UUID, TipoA
     private final TipoActividadDTOConverter dtoConverter;
 
     public TipoActividad saveAusencia(TipoActividadDTO actividad, Usuario usuario){
-        TipoActividad nueva = dtoConverter.convertAusenciaToTIpoActividad(actividad);
+        TipoActividad nueva = dtoConverter.convertActividadDTOToTipoActividad(actividad);
         nueva.setTipo(Tipo.AUSENCIA);
-        if (!planificacionService.existeByMes(actividad.getFecha())){
-            planificacionService.saveFromMes(nueva, usuario);
+        if (!planificacionService.existeByMes(actividad.getFecha(), usuario.getId())){
+            planificacionService.saveFromActividad(nueva, usuario);
         }
-        nueva.addDiaToPlanificacion(planificacionService.findPorMes(actividad.getFecha()));
+        nueva.addDiaToPlanificacion(planificacionService.findPorMes(actividad.getFecha(), usuario.getId()));
+        return save(nueva);
+    }
+
+    public TipoActividad saveTurno(TipoActividadDTO actividad, Usuario usuario){
+        TipoActividad nueva = dtoConverter.convertActividadDTOToTipoActividad(actividad);
+        nueva.setTipo(Tipo.TRABAJO);
+        if (!planificacionService.existeByMes(actividad.getFecha(), usuario.getId())){
+            planificacionService.saveFromActividad(nueva, usuario);
+        }
+        nueva.addDiaToPlanificacion(planificacionService.findPorMes(actividad.getFecha(), usuario.getId()));
         return save(nueva);
     }
 
     public List<TipoActividadDTO> findAllByFecha(LocalDate fecha){
         List<TipoActividad> ausencias = repository.findAllAusenciasByFecha(fecha);
-        List<TipoActividadDTO> ausenciaDTOS =ausencias.stream().map(x -> dtoConverter.convertAusenciaToDTO(x)).collect(Collectors.toList());
+        List<TipoActividadDTO> ausenciaDTOS =ausencias.stream().map(x -> dtoConverter.convertActividadToDTO(x)).collect(Collectors.toList());
         return ausenciaDTOS;
     }
 
-    public List<TipoActividadDTO> findAllByUsuario(UUID id){
+    public List<BasicActividadDTO> findAllAusenciasByUsuario(UUID id){
         List<TipoActividad> ausencias = repository.findAllAusenciasByUsuario(id);
-        List<TipoActividadDTO> ausenciaDTOS =ausencias.stream().map(x -> dtoConverter.convertAusenciaToDTO(x)).collect(Collectors.toList());
+        List<BasicActividadDTO> ausenciaDTOS =ausencias.stream().map(x -> dtoConverter.convertActividadToBasicDTO(x)).collect(Collectors.toList());
+        return ausenciaDTOS;
+    }
+
+    public List<TipoActividadDTO> findTurnoDeUsuario(UUID id, LocalDate fecha){
+        List<TipoActividad> ausencias = repository.findTurnoDeUsuario(id, fecha);
+        List<TipoActividadDTO> ausenciaDTOS =ausencias.stream().map(x -> dtoConverter.convertActividadToDTO(x)).collect(Collectors.toList());
         return ausenciaDTOS;
     }
 }

@@ -1,6 +1,5 @@
 import 'package:cotidie_mobile_app/blocs/login_bloc/login_bloc.dart';
 import 'package:cotidie_mobile_app/models/auth/login_dto.dart';
-import 'package:cotidie_mobile_app/pages/menu_page.dart';
 import 'package:cotidie_mobile_app/repository/auth_repository.dart';
 import 'package:cotidie_mobile_app/repository/imp/auth_repository_impl.dart';
 import 'package:cotidie_mobile_app/utils/preferences.dart';
@@ -8,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:cotidie_mobile_app/styles/style.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -84,6 +85,8 @@ class _LoginPageState extends State<LoginPage> {
               listener: (context, state) {
                 if (state is LoginSuccessState) {
                   PreferenceUtils.setString(
+                      "usuario_id", state.loginResponse.id);
+                  PreferenceUtils.setString(
                       "jwtToken", state.loginResponse.tokenJwt);
                   PreferenceUtils.setString(
                       "nombre", state.loginResponse.nombre);
@@ -95,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const MenuPage()));
+                          builder: (context) => const homePage()));
                 } else if (state is LoginErrorState) {
                   _showSnackbar(context, state.mensaje);
                 }
@@ -134,7 +137,10 @@ class _LoginPageState extends State<LoginPage> {
         key: _formKey,
         child: Center(
           child: Padding(
-            padding: EdgeInsets.only(top: heightTotal/5, left: widthTotal/20, right: widthTotal/20),
+            padding: EdgeInsets.only(
+                top: heightTotal / 5,
+                left: widthTotal / 20,
+                right: widthTotal / 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -198,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: style.tBlancoG,
                     ),
                     style: ElevatedButton.styleFrom(
-                        fixedSize: Size(widthTotal/2, heightTotal/20),
+                        fixedSize: Size(widthTotal / 2, heightTotal / 20),
                         shape: const StadiumBorder(),
                         primary: Colors.amber),
                   ),

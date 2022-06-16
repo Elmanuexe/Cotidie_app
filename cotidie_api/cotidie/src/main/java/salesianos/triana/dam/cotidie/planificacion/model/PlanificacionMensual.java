@@ -40,7 +40,7 @@ public class PlanificacionMensual {
     private LocalDate fechaFin;
 
     @OneToMany(mappedBy = "planificacion", fetch = FetchType.LAZY)
-    private List<TipoActividad> dias = new ArrayList<>();
+    private List<TipoActividad> eventos = new ArrayList<>();
 
     @ManyToOne
     private Usuario usuario;
